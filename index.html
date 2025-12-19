@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal | Programmer Portfolio</title>
+    <meta name="description" content="A modern 90s terminal-style landing page for a programmer.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="crt">
+    <div class="scanlines"></div>
+    <div class="terminal-container">
+        <header id="boot-sequence"></header>
+        
+        <main id="terminal-output">
+            <section id="prompt-section">
+                <span class="prompt">guest@terminal:~$</span>
+                <span id="typing-line"></span>
+                <span class="cursor">_</span>
+            </section>
+        </main>
+
+        <section id="input-area">
+            <input type="text" id="terminal-input" autofocus spellcheck="false" autocomplete="off">
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
