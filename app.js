@@ -10,9 +10,9 @@ let isAdmin = false;
 // Initial static data
 const STATIC_DATA = {
     social: [
-        { name: 'GitHub', url: 'https://github.com' },
-        { name: 'Twitter', url: 'https://twitter.com' },
-        { name: 'LinkedIn', url: 'https://linkedin.com' }
+        { name: 'GitHub', url: 'https://github.com/robinpnalex' },
+        { name: 'X', url: 'https://x.com/robinalexpnn' },
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/robin-alex-21183a385/' }
     ],
     articles: [
         { title: 'The Future of AI Coding', status: 'Liked', url: '#' }
