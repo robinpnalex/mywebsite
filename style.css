@@ -171,3 +171,26 @@ body {
         font-size: 1rem;
     }
 }
+
+/* Photo Gallery Styles */
+.terminal-photo {
+    display: block;
+    max-width: 200px;
+    max-height: 150px;
+    margin: 0.5rem 0;
+    border: 2px solid var(--text-color);
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--glow-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.terminal-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.comment {
+    color: #6272A4;
+    font-style: italic;
+}

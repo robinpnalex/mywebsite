@@ -19,7 +19,8 @@ const STATIC_DATA = {
     ],
     videos: [
         { title: '90s Tech Nostalgia', status: 'Liked', url: '#' }
-    ]
+    ],
+    photos: []
 };
 
 // Load from localStorage or use defaults
@@ -43,13 +44,15 @@ const COMMANDS = {
 - <span class="keyword">social</span>: Display social media links
 - <span class="keyword">articles</span>: List my articles
 - <span class="keyword">videos</span>: List interesting videos
+- <span class="keyword">photos</span>: Browse my photo gallery
 - <span class="keyword">clear</span>: Clear the terminal
 - <span class="keyword">whoami</span>: About me
 - <span class="keyword">admin</span>: Login to manage content`;
 
         if (isAdmin) {
             helpText += `\n<span class="keyword">--- ADMIN COMMANDS ---</span>
-- <span class="keyword">add &lt;type&gt; &lt;title&gt; &lt;url&gt;</span>: Add (type: article/video)
+- <span class="keyword">add &lt;type&gt; &lt;title&gt; &lt;url&gt;</span>: Add (type: article/video/photo)
+- <span class="keyword">delete &lt;type&gt; &lt;index&gt;</span>: Delete (type: article/video/photo)
 - <span class="keyword">logout</span>: Logout of admin mode`;
         }
         return helpText;
@@ -57,6 +60,17 @@ const COMMANDS = {
     social: () => DATA.social.map(s => `[<span class="url" onclick="window.open('${s.url}')">${s.name}</span>]`).join('  '),
     articles: () => DATA.articles.map((a, i) => `${i + 1}. [${a.status || 'Link'}] <span class="url" onclick="window.open('${a.url}')">${a.title}</span>`).join('\n'),
     videos: () => DATA.videos.map((v, i) => `${i + 1}. [${v.status || 'Link'}] <span class="url" onclick="window.open('${v.url}')">${v.title}</span>`).join('\n'),
+    photos: () => {
+        if (!DATA.photos || DATA.photos.length === 0) {
+            return "No photos yet. Check back later!";
+        }
+        let output = `<span class="keyword">📷 Photo Gallery</span> (${DATA.photos.length} photos)\n\n`;
+        output += DATA.photos.map((p, i) =>
+            `${i + 1}. <span class="url" onclick="window.open('${p.url}')">${p.title}</span>\n   <img src="${p.url}" alt="${p.title}" class="terminal-photo" onerror="this.style.display='none'">`
+        ).join('\n\n');
+        output += `\n\n<span class="comment">Click on a title to view full size</span>`;
+        return output;
+    },
     whoami: () => `I'm a programmer with a passion for vintage aesthetics and modern code. Welcome to my digital terminal.`,
     admin: () => {
         if (isAdmin) return "Already logged in as admin.";
@@ -92,12 +106,49 @@ const COMMANDS = {
             DATA.articles.push({ title, url, status: 'Added' });
         } else if (type === 'video' || type === 'videos') {
             DATA.videos.push({ title, url, status: 'Added' });
+        } else if (type === 'photo' || type === 'photos') {
+            if (!DATA.photos) DATA.photos = [];
+            DATA.photos.push({ title, url });
         } else {
-            return "Invalid type. Use 'article' or 'video'.";
+            return "Invalid type. Use 'article', 'video', or 'photo'.";
         }
 
         saveData(DATA);
         return `Successfully added ${type}: ${title}`;
+    },
+    delete: (args) => {
+        if (!isAdmin) return "Permission denied. Please log in using 'admin'.";
+        if (args.length < 2) return "Usage: delete &lt;type&gt; &lt;index&gt;";
+
+        const type = args[0].toLowerCase();
+        const index = parseInt(args[1], 10);
+
+        if (isNaN(index) || index < 1) {
+            return "Invalid index. Use a positive number.";
+        }
+
+        let removed;
+        if (type === 'article' || type === 'articles') {
+            if (index > DATA.articles.length) {
+                return `Index out of range. You have ${DATA.articles.length} article(s).`;
+            }
+            removed = DATA.articles.splice(index - 1, 1)[0];
+        } else if (type === 'video' || type === 'videos') {
+            if (index > DATA.videos.length) {
+                return `Index out of range. You have ${DATA.videos.length} video(s).`;
+            }
+            removed = DATA.videos.splice(index - 1, 1)[0];
+        } else if (type === 'photo' || type === 'photos') {
+            if (!DATA.photos || index > DATA.photos.length) {
+                return `Index out of range. You have ${DATA.photos?.length || 0} photo(s).`;
+            }
+            removed = DATA.photos.splice(index - 1, 1)[0];
+        } else {
+            return "Invalid type. Use 'article', 'video', or 'photo'.";
+        }
+
+        saveData(DATA);
+        return `Successfully deleted ${type}: ${removed.title}`;
     }
 };
 
