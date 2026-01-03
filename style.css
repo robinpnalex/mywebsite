@@ -27,9 +27,12 @@ body {
     content: " ";
     display: block;
     position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
     z-index: 10;
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
@@ -39,7 +42,10 @@ body {
     content: " ";
     display: block;
     position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background: rgba(18, 16, 16, 0.1);
     opacity: 0;
     z-index: 10;
@@ -48,27 +54,89 @@ body {
 }
 
 @keyframes flicker {
-    0% { opacity: 0.27861; }
-    5% { opacity: 0.34769; }
-    10% { opacity: 0.23604; }
-    15% { opacity: 0.90626; }
-    20% { opacity: 0.18128; }
-    25% { opacity: 0.83891; }
-    30% { opacity: 0.65583; }
-    35% { opacity: 0.57807; }
-    40% { opacity: 0.26559; }
-    45% { opacity: 0.84693; }
-    50% { opacity: 0.96019; }
-    55% { opacity: 0.08523; }
-    60% { opacity: 0.71056; }
-    65% { opacity: 0.73437; }
-    70% { opacity: 0.28557; }
-    75% { opacity: 0.96303; }
-    80% { opacity: 0.2268; }
-    85% { opacity: 0.03445; }
-    90% { opacity: 0.7834; }
-    95% { opacity: 0.35613; }
-    100% { opacity: 0.25529; }
+    0% {
+        opacity: 0.27861;
+    }
+
+    5% {
+        opacity: 0.34769;
+    }
+
+    10% {
+        opacity: 0.23604;
+    }
+
+    15% {
+        opacity: 0.90626;
+    }
+
+    20% {
+        opacity: 0.18128;
+    }
+
+    25% {
+        opacity: 0.83891;
+    }
+
+    30% {
+        opacity: 0.65583;
+    }
+
+    35% {
+        opacity: 0.57807;
+    }
+
+    40% {
+        opacity: 0.26559;
+    }
+
+    45% {
+        opacity: 0.84693;
+    }
+
+    50% {
+        opacity: 0.96019;
+    }
+
+    55% {
+        opacity: 0.08523;
+    }
+
+    60% {
+        opacity: 0.71056;
+    }
+
+    65% {
+        opacity: 0.73437;
+    }
+
+    70% {
+        opacity: 0.28557;
+    }
+
+    75% {
+        opacity: 0.96303;
+    }
+
+    80% {
+        opacity: 0.2268;
+    }
+
+    85% {
+        opacity: 0.03445;
+    }
+
+    90% {
+        opacity: 0.7834;
+    }
+
+    95% {
+        opacity: 0.35613;
+    }
+
+    100% {
+        opacity: 0.25529;
+    }
 }
 
 .scanlines {
@@ -77,13 +145,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        transparent 50%,
-        rgba(0, 0, 0, 0.1) 50%,
-        rgba(0, 0, 0, 0.1)
-    );
+    background: linear-gradient(to bottom,
+            transparent,
+            transparent 50%,
+            rgba(0, 0, 0, 0.1) 50%,
+            rgba(0, 0, 0, 0.1));
     background-size: 100% 4px;
     z-index: 5;
     pointer-events: none;
@@ -138,8 +204,15 @@ body {
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 .command-line {
@@ -148,7 +221,8 @@ body {
 
 .command-output {
     margin-bottom: 1rem;
-    color: #fff; /* White for content to make it readable */
+    color: #fff;
+    /* White for content to make it readable */
     font-family: var(--font-code);
     font-size: 1rem;
     opacity: 0.9;
@@ -158,39 +232,27 @@ body {
     color: #ff5555;
 }
 
-.keyword { color: #8BE9FD; }
-.url { color: #BD93F9; text-decoration: underline; cursor: pointer; }
-.url:hover { color: #50FA7B; }
+.keyword {
+    color: #8BE9FD;
+}
+
+.url {
+    color: #BD93F9;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.url:hover {
+    color: #50FA7B;
+}
 
 @media (max-width: 768px) {
     .terminal-container {
         padding: 1rem;
         font-size: 1rem;
     }
+
     #terminal-input {
         font-size: 1rem;
     }
-}
-
-/* Photo Gallery Styles */
-.terminal-photo {
-    display: block;
-    max-width: 200px;
-    max-height: 150px;
-    margin: 0.5rem 0;
-    border: 2px solid var(--text-color);
-    border-radius: 4px;
-    box-shadow: 0 0 10px var(--glow-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-}
-
-.terminal-photo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-.comment {
-    color: #6272A4;
-    font-style: italic;
 }
